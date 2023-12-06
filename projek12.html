@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Manajemen Kegiatan Sekolah</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.activity-detail-box {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-detail-box p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+#login-container {
+    text-align: center;
+    margin-top: 100px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#login-form {
+    display: inline-block;
+    text-align: left;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2184b8;
+}
+
+#content-container {
+    display: none;
+    margin: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Tampilan Kotak-Kotak Berwarna untuk Jenis Kegiatan */
+.activity-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+.activity-box:hover {
+    background-color: #f5f5f5;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistem Manajemen Kegiatan Sekolah DCC Global School</h1>
+    </header>
+    <div id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="content-container" style="display: none;">
+        
+    </div>
+
+    <div id="content-container" class="hidden">
+        <!-- Konten utama akan ditambahkan di sini -->
+        <button onclick="goBack()">Kembali</button>
+        <div id="activity-details"></div>
+    </div>
+
+    <script>
+        // Kode JavaScript akan ditambahkan di sini
+        function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // Logika login (Contoh sederhana, Anda dapat menggantinya dengan autentikasi yang lebih aman)
+    if (username === "admin" && password === "password") {
+        // Berhasil login, tampilkan konten utama
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("content-container").style.display = "block";
+        // Panggil fungsi untuk menampilkan jenis kegiatan
+        displayActivityTypes();
+    } else {
+        alert("Login gagal. Periksa kembali username dan password.");
+    }
+}
+
+function displayActivityTypes() {
+    var contentContainer = document.getElementById("content-container");
+    contentContainer.innerHTML = "<h2>Jenis Kegiatan</h2>";
+
+    // Tambahkan jenis kegiatan (disesuaikan dengan kebutuhan)
+    var activityTypes = ["Keagamaan", "Ekstrakurikuler"];
+
+    activityTypes.forEach(function (type) {
+        var activityBox = document.createElement("div");
+        activityBox.className = "activity-box";
+        activityBox.innerHTML = "<h3>" + type + "</h3>";
+
+        activityBox.onclick = function () {
+            // Panggil fungsi untuk menampilkan detail kegiatan berdasarkan jenis
+            displayActivityDetails(type);
+        };
+
+        contentContainer.appendChild(activityBox);
+    });
+}
+function displayActivityDetails(activityType) {
+    var contentContainer = document.getElementById("content-container");
+    contentContainer.innerHTML = "<h2>Detail Kegiatan: " + activityType + "</h2>";
+
+    //  menampilkan detail kegiatan 
+    if (activityType === "Keagamaan") {
+        var activities = [
+            { time: "Jam 07:30", event: "Sholat Dhuha" },
+            { time: "Jam 12:00", event: "Sholat Dzuhur" },
+            { time: "Jam 15:00", event: "Sholat Ashar" }
+        ];
+        
+    } else if (activityType === "Ekstrakurikuler") {
+        var activities = [
+            { time: "Jam 08:00", event: "Senam" },
+            { time: "Jam 09:00", event: "Berenang" },
+            { time: "Jam 13:00", event: "Pramuka" }
+        ];
+    }
+
+    activities.forEach(function (activity) {
+        var activityBox = document.createElement("div");
+        activityBox.className = "activity-detail-box";
+        activityBox.innerHTML = "<p><strong>Waktu:</strong> " + activity.time + "</p>" +
+                                "<p><strong>Kegiatan:</strong> " + activity.event + "</p>";
+        contentContainer.appendChild(activityBox);
+        
+    });
+    
+}
+
+
+    </script>
+</body>
+</html>
