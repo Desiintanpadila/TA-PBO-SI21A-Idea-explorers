@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Absensi Siswa Kegiatan SMA DCC Global School</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #c7c7c7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(202, 39, 39, 0.1);
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #020101;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #c4142b;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e20909;
+}
+
+#riwayatAbsensi {
+    margin-top: 20px;
+}
+
+#riwayatAbsensi table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#riwayatAbsensi th, #riwayatAbsensi td {
+    border: 1px solid #9e1b1b;
+    padding: 8px;
+    text-align: left;
+}
+
+#riwayatAbsensi th {
+    background-color: #b61f77;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Absensi Siswa Kegiatan SMA DCC Global School</h1>
+        <form id="absensiForm">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="kelas">Kelas:</label>
+            <select id="kelas" name="kelas" required>
+                <option value="X">X</option>
+                <option value="XI">XI</option>
+                <option value="XII">XII</option>
+            </select>
+
+            <label for="kegiatan">Kegiatan:</label>
+            <select id="kegiatan" name="kegiatan" required>
+                <option value="osis">Osis</option>
+                <option value="pramuka">Pramuka</option>
+                <option value="pmr">PMR</option>
+                <option value="english-club">English Club</option>
+                <option value="silat">Silat</option>
+                <option value="renang">Renang</option>
+            </select>
+
+            <label for="kehadiran">Kehadiran:</label>
+            <select id="kehadiran" name="kehadiran" required>
+                <option value="hadir">Hadir</option>
+                <option value="tidak-hadir">Tidak Hadir</option>
+            </select>
+
+            <label for="tanggal">Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+
+            <button type="button" onclick="submitAbsensi()">Submit</button>
+        </form>
+
+        <div id="riwayatAbsensi">
+            <!-- Riwayat absensi akan ditampilkan di sini -->
+        </div>
+    </div>
+</section> 
+
+    <script>
+// Fungsi untuk menangani pengiriman absensi
+function submitAbsensi() {
+    // Dapatkan nilai dari formulir
+    var nama = document.getElementById("nama").value;
+    var kelas = document.getElementById("kelas").value;
+    var kegiatan = document.getElementById("kegiatan").value;
+    var kehadiran = document.getElementById("kehadiran").value;
+    var tanggal = document.getElementById("tanggal").value;
+
+    // Buat elemen tabel untuk menampilkan riwayat absensi
+    var table = document.createElement("table");
+    table.innerHTML = "<tr><th>Nama</th><th>Kelas</th><th>Kegiatan</th><th>Kehadiran</th><th>Tanggal</th></tr>";
+
+    // Tambahkan baris baru untuk absensi terbaru
+    var newRow = table.insertRow(1);
+    newRow.insertCell(0).innerHTML = nama;
+    newRow.insertCell(1).innerHTML = kelas;
+    newRow.insertCell(2).innerHTML = kegiatan;
+    newRow.insertCell(3).innerHTML = kehadiran;
+    newRow.insertCell(4).innerHTML = tanggal;
+
+    // Tampilkan riwayat absensi
+    document.getElementById("riwayatAbsensi").appendChild(table);
+}
+    </script>
+</html>
