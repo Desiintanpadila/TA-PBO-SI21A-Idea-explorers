@@ -102,7 +102,7 @@ button:hover {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
-    if (username === 'admin' && password === 'admin123') {
+    if (username === 'Dcc Global School' && password === 'adminDCC') {
         document.getElementById('login-container').style.display = 'none';
         document.getElementById('main-container').style.display = 'block';
         loadActivities();
@@ -124,6 +124,18 @@ function loadActivities() {
         <button onclick="loadSchedule('religious')">Religious Activities</button>
         <button onclick="loadSchedule('extracurricular')">Extracurricular Activities</button>
     `;
+}
+
+function loadSchedule(activityType) {
+    var scheduleContainer = document.getElementById('schedule-container');
+    // Menampilkan jadwal kegiatan sesuai jenis kegiatan
+    if (activityType === 'religious') {
+        window.location.href = "jadwal_Relegius.html";
+    } else if (activityType === 'extracurricular') {
+        window.location.href = "jadwal_extrakulikuler.html";
+    }
+
+    scheduleContainer.classList.remove('hidden');
 }
 </script>
 </body>
