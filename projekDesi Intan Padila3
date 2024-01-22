@@ -12,16 +12,8 @@ body {
     background-color: #f0f0f0;
 }
 
-
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.main-container {
+.login-container,
+#main-container {
     text-align: center;
     background-color: #fff;
     padding: 20px;
@@ -89,6 +81,22 @@ button:hover {
             <button type="button" onclick="login()">Login</button>
         </form>
     </div>
+    <div id="content-container" style="display: none;">
+    </div>
+    <div id="main-container" class="hidden">
+        <div class="header">
+            <h1>Welcome to DCC Global School Activities Management</h1>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <div id="activities-container">
+            
+        </div>
+
+        <div id="schedule-container" class="hidden">
+            <!-- Jadwal kegiatan -->
+        </div>
+    </div>
 <script>
         function login() {
     var username = document.getElementById('username').value;
@@ -101,6 +109,21 @@ button:hover {
     } else {
         alert('Login failed. Please check your username and password.');
     }
+}
+function logout() {
+    document.getElementById('login-container').style.display = 'block';
+    document.getElementById('main-container').style.display = 'none';
+}
+
+function loadActivities() {
+    var activitiesContainer = document.getElementById('activities-container');
+    
+    // Menampilkan jenis-jenis kegiatan 
+    activitiesContainer.innerHTML = `
+        <h2>Select Activity Type</h2>
+        <button onclick="loadSchedule('religious')">Religious Activities</button>
+        <button onclick="loadSchedule('extracurricular')">Extracurricular Activities</button>
+    `;
 }
 </script>
 </body>
