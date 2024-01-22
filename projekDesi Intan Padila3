@@ -73,3 +73,35 @@ button:hover {
 }
     </style>
 </head>
+
+<body>
+    <div class="login-container" id="login-container">
+        <header>
+            <h1>Dcc Global School</h1>
+        </header>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+<script>
+        function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    if (username === 'admin' && password === 'admin123') {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('main-container').style.display = 'block';
+        loadActivities();
+    } else {
+        alert('Login failed. Please check your username and password.');
+    }
+}
+</script>
+</body>
+</html>
