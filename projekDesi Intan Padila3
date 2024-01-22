@@ -121,7 +121,7 @@ function loadActivities() {
     // Menampilkan jenis-jenis kegiatan 
     activitiesContainer.innerHTML = `
         <h2>Select Activity Type</h2>
-        <button onclick="loadSchedule('religious')">Religious Activities</button>
+        <button onclick="loadSchedule('Kegiatan')">School Activities</button>
         <button onclick="loadSchedule('extracurricular')">Extracurricular Activities</button>
     `;
 }
@@ -129,8 +129,8 @@ function loadActivities() {
 function loadSchedule(activityType) {
     var scheduleContainer = document.getElementById('schedule-container');
     // Menampilkan jadwal kegiatan sesuai jenis kegiatan
-    if (activityType === 'religious') {
-        window.location.href = "jadwal_Relegius.html";
+    if (activityType === 'Kegiatan') {
+        window.location.href = "jadwal_Kegiatan.html";
     } else if (activityType === 'extracurricular') {
         window.location.href = "jadwal_extrakulikuler.html";
     }
