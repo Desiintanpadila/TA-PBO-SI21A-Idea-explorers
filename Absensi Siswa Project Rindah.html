@@ -6,29 +6,13 @@
     <link rel="stylesheet" href="style.css">
     <title>Absensi Siswa Kegiatan SMA DCC Global School</title>
     <style>
-        body {
+    body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
-
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: #c7c7c7;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(202, 39, 39, 0.1);
-}
-
-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-}
-
-label {
+.label {
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -53,14 +37,22 @@ button {
 button:hover {
     background-color: #e20909;
 }
-
+.frame_table {
+        border: 1px solid #333333;
+        height: 30px;
+        padding: 10px;
+      }
+   
 #riwayatAbsensi {
     margin-top: 20px;
 }
 
-#riwayatAbsensi table {
-    width: 100%;
-    border-collapse: collapse;
+#riwayatAbsensi table {   .frame_header {
+        background: #f3f3f3;
+        height: 30px;
+        padding: 10px;
+      }
+
 }
 
 #riwayatAbsensi th, #riwayatAbsensi td {
@@ -72,7 +64,7 @@ button:hover {
 #riwayatAbsensi th {
     background-color: #b61f77;
     color: #fff;
-}
+}     
     </style>
 </head>
 <body>
@@ -111,10 +103,155 @@ button:hover {
             <button type="button" onclick="submitAbsensi()">Submit</button>
         </form>
 
-        <div id="riwayatAbsensi">
+        <!-- area tabel -->
+    <table id="tbl_data">
+        <!-- baris tabel -->
+        <tr>
+                <!-- kolom tabel -->  
+    <th class="frame_table frame_header" style="width: 20%">Aksi</th>
+    <th class="frame_table frame_header" style="width: 10%">No</th>
+    <th class="frame_table frame_header" style="width: 40%">Nama</th>
+    <th class="frame_table frame_header" style="width: 20%">Kelas</th>
+    <th class="frame_table frame_header" style="width: 30%">Kegiatan</th>
+    <th class="frame_table frame_header" style="width: 20%">Kehadiran</th>
+    <th class="frame_table frame_header" style="width: 20%">Tanggal</th>
+    </tr>
+    </table>
+
+    <!-- internal js -->
+    <script>
+        // inisialisasi variabel komponen
+        let txt_nama = document.querySelector("#txt_nama");
+        let txt_kelas = document.querySelector("#txt_kelas");
+        let txt_kegiatan = document.querySelector("#txt_kegiatan");
+        let txt_kehadiran = document.querySelector("#txt_kehadiran");
+        let txt_tanggal = document.querySelector("#txt_tanggal"); 
+
+        // insialisasi variabel untuk menampung array
+        let data = [];
+
+        // event pada saat "btn_tambah" di klik
+        btn_tambah.addEventListenner("click", () => {
+            // jikasalah satu "btn_tambah" di klik
+            if (txt_nama.value == "" || txt_kelas.value == "" || txt_kegiatan.value == "" || txt_kehadiran.value == "" || txt_tanggal.value == "") {
+                // tampilkan pesan
+                alert("Lengkapi Seluruh Data |");
+            }
+            // jika seluruh data input sudah diisi
+            else {
+                // isi array dari nilai "txt_nama" "txt_kelas" "txt_kegiatan" "txt_kehadiran" dan "txt_tanggal"
+                data.push ([txt_nama.value, txt_kelas.value, txt_kegiatan, txt_kehadiran.value, txt_tanggal]);
+
+                // panggil fungsi "viewData"
+                viewData();
+            }
+        });
+
+        // buat fungsi "clearComponent" untuk menghapus isi pada komponen input
+        const clearComponent = () => {
+            txt_nama.value = "";
+            txt_kelas.value = "";
+            txt_kegiatan.value = "";
+            txt_kehadiran.value = "";
+            txt_tanggal.value = "";
+        }
+        // buat fungsi "viewData" untuk mennampilkan data array ke dalam tabel
+        const viewData = () => {
+            // insialisasi variabel untuk baris tabel. diisi dengan nilai 0
+            let baris_tabel = 0;
+            // insialisasi variabel untuk baris dan kolom tabel
+            let content_tabel = `<tr>
+                <th class="frame_table frame_header" style="width: 20%">Aksi</th>
+                <th class="frame_table frame_header" style="width: 10%">No</th>
+                <th class="frame_table frame_header" style="width: 40%">Nama</th>
+                <th class="frame_table frame_header" style="width: 20%">Kelas</th>
+                <th class="frame_table frame_header" style="width: 30%">Kegiatan</th>
+                <th class="frame_table frame_header" style="width:20%">Kehadiran</th>
+                <th class="frame_table frame_header" style="width: 20%">Tanggal</th>
+            </tr>`;
+
+            // lakukan perulangan "forEach" > (looping untuk array)
+            // isi data > data yang akan ditampilkan ke tabel, dimana looping dimulai dari 0
+            data.forEach((isi_data, looping_data) => {
+                // buat baris isi
+                content_tabel += "<tr>";
+
+                    // buat kolom untuk Hapus Data 
+                    content_tabel += `<td class="frame_table" remove_cell" style="text-align: center" onclick="removeData((${looping_data})">Hapus Data</td>`;
+                     // buat kolom untuk nomor
+                    content_tabel += `<td class="frame_table" style="text-align: center">${looping_data+1}</td>`;
+                    // buat kolom untuk data nama
+                    content_tabel += `<td class="frame_table" style="text-align: center">${isi_data[0]}</td>`;
+                    // buat kolom untuk data kelas
+                    content_tabel += `<td class="frame_table">${isi_data[1]}</td>`;
+                    // buat kolom untuk data kegiatan
+                    content_tabel += `<td class="frame_tabel">${isi_data[2]}</td>`;
+                    // buat kolom untuk data kehadiran
+                    content_tabel += `<td class="frame_tabel">${isi_data[3]}</td>`;
+                    // buat kolom untuk data tanggal
+                    content_tabel += `<td class="frame_tabel">${isi_data[4]}</td>`;
+
+                    // tutup baris isi
+                    content_tabel += "</tr>";
+
+                    // tambah baris baru (baris-tabel ditambah 1)
+                    baris_tabel ++;
+                });
+                // tampiilkan "content_tabel" ke dalam "tbl_data"
+                tbl_data.innerHTML = content_tabel;
+
+                // panggil fungsi "clearComponent"
+                clearComponent();
+            };
+
+             // buat fungsi "removeData" untuk menghapus array berdasarkan index yang dipiilih
+             const removeData = (index) => {
+                // jika tombol "OK" di klik
+                if (
+                    confirm(
+                        `Data Siswa : ${data[index][1]} (index ke-${index}) Ingin Dihapus?`
+                        ) == true
+                ) {
+                    // hapus array berdasarkan index yang dipilih
+                    data.splice(index, 1);
+
+                    // panggil fungsi "viewData"
+                    viewData();
+                }
+              };
             <!-- Riwayat absensi akan ditampilkan di sini -->
-        </div>
-    </div>
+    
+// Fungsi untuk menangani pengiriman absensi
+function submitAbsensi() {
+    // Dapatkan nilai dari formulir
+    var nama = document.getElementById("nama").value;
+    var kelas = document.getElementById("kelas").value;
+    var kegiatan = document.getElementById("kegiatan").value;
+    var kehadiran = document.getElementById("kehadiran").value;
+    var tanggal = document.getElementById("tanggal").value;
+
+    // Buat elemen tabel untuk menampilkan riwayat absensi
+    var table = document.createElement("table");
+    table.innerHTML = "<tr><th>Nama</th><th>Kelas</th><th>Kegiatan</th><th>Kehadiran</th><th>Tanggal</th></tr>";
+
+    // Tambahkan baris baru untuk absensi terbaru
+    var newRow = table.insertRow(1);
+    newRow.insertCell(0).innerHTML = nama;
+    newRow.insertCell(1).innerHTML = kelas;
+    newRow.insertCell(2).innerHTML = kegiatan;
+    newRow.insertCell(3).innerHTML = kehadiran;
+    newRow.insertCell(4).innerHTML = tanggal;
+
+    // Tampilkan riwayat absensi
+    document.getElementById("riwayatAbsensi").appendChild(table);
+}
+    </script>
+</html>
+    </script>
+    </body>
+</html>
+
+    </script>
 </section> 
 
     <script>
