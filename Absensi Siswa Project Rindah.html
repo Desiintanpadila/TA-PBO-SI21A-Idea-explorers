@@ -6,29 +6,13 @@
     <link rel="stylesheet" href="style.css">
     <title>Absensi Siswa Kegiatan SMA DCC Global School</title>
     <style>
-        body {
+    body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
-
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: #c7c7c7;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(202, 39, 39, 0.1);
-}
-
-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-}
-
-label {
+.label {
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -53,14 +37,22 @@ button {
 button:hover {
     background-color: #e20909;
 }
-
+.frame_table {
+        border: 1px solid #333333;
+        height: 30px;
+        padding: 10px;
+      }
+   
 #riwayatAbsensi {
     margin-top: 20px;
 }
 
-#riwayatAbsensi table {
-    width: 100%;
-    border-collapse: collapse;
+#riwayatAbsensi table {   .frame_header {
+        background: #f3f3f3;
+        height: 30px;
+        padding: 10px;
+      }
+
 }
 
 #riwayatAbsensi th, #riwayatAbsensi td {
@@ -72,7 +64,7 @@ button:hover {
 #riwayatAbsensi th {
     background-color: #b61f77;
     color: #fff;
-}
+}     
     </style>
 </head>
 <body>
@@ -110,6 +102,21 @@ button:hover {
 
             <button type="button" onclick="submitAbsensi()">Submit</button>
         </form>
+
+        <!-- area tabel -->
+    <table id="tbl_data">
+        <!-- baris tabel -->
+        <tr>
+                <!-- kolom tabel -->  
+    <th class="frame_table frame_header" style="width: 20%">Aksi</th>
+    <th class="frame_table frame_header" style="width: 10%">No</th>
+    <th class="frame_table frame_header" style="width: 40%">Nama</th>
+    <th class="frame_table frame_header" style="width: 20%">Kelas</th>
+    <th class="frame_table frame_header" style="width: 30%">Kegiatan</th>
+    <th class="frame_table frame_header" style="width: 20%">Kehadiran</th>
+    <th class="frame_table frame_header" style="width: 20%">Tanggal</th>
+    </tr>
+    </table>
 
         <div id="riwayatAbsensi">
             <!-- Riwayat absensi akan ditampilkan di sini -->
